@@ -1,0 +1,103 @@
+// <1> <(···)> <page max: base> <current> <page max: base> <(···)> <total>
+
+>> navigation_model_create(6, 17 ,4);
+0: {type: 3, page: 1}
+1: {type: 3, page: 2}
+2: {type: 3, page: 3}
+3: {type: 3, page: 4}
+4: {type: 3, page: 5}
+5: {type: 1, page: 6}
+6: {type: 3, page: 7}
+7: {type: 3, page: 8}
+8: {type: 3, page: 9}
+9: {type: 3, page: 10}
+10: {type: 2}
+11: {type: 3, page: 17}
+>> navigation_model_create(7, 17 ,4);
+0: {type: 3, page: 1}
+1: {type: 2}
+2: {type: 3, page: 3}
+3: {type: 3, page: 4}
+4: {type: 3, page: 5}
+5: {type: 3, page: 6}
+6: {type: 1, page: 7}
+7: {type: 3, page: 8}
+8: {type: 3, page: 9}
+9: {type: 3, page: 10}
+10: {type: 3, page: 11}
+11: {type: 2}
+12: {type: 3, page: 17}
+>> navigation_model_create(11, 17 ,4);
+0: {type: 3, page: 1}
+1: {type: 2}
+2: {type: 3, page: 7}
+3: {type: 3, page: 8}
+4: {type: 3, page: 9}
+5: {type: 3, page: 10}
+6: {type: 1, page: 11}
+7: {type: 3, page: 12}
+8: {type: 3, page: 13}
+9: {type: 3, page: 14}
+10: {type: 3, page: 15}
+11: {type: 2}
+12: {type: 3, page: 17}
+>> navigation_model_create(12, 17 ,4);
+0: {type: 3, page: 1}
+1: {type: 2}
+2: {type: 3, page: 8}
+3: {type: 3, page: 9}
+4: {type: 3, page: 10}
+5: {type: 3, page: 11}
+6: {type: 1, page: 12}
+7: {type: 3, page: 13}
+8: {type: 3, page: 14}
+9: {type: 3, page: 15}
+10: {type: 3, page: 16}
+11: {type: 3, page: 17}
+
+>> navigation_model_create(5, 17, 3);
+0: {type: 3, page: 1}
+1: {type: 3, page: 2}
+2: {type: 3, page: 3}
+3: {type: 3, page: 4}
+4: {type: 1, page: 5}
+5: {type: 3, page: 6}
+6: {type: 3, page: 7}
+7: {type: 3, page: 8}
+8: {type: 2}
+9: {type: 3, page: 17}
+>> navigation_model_create(6, 17, 3);
+0: {type: 3, page: 1}
+1: {type: 2}
+2: {type: 3, page: 3}
+3: {type: 3, page: 4}
+4: {type: 3, page: 5}
+5: {type: 1, page: 6}
+6: {type: 3, page: 7}
+7: {type: 3, page: 8}
+8: {type: 3, page: 9}
+9: {type: 2}
+10: {type: 3, page: 17}
+>> navigation_model_create(12, 17, 3);
+0: {type: 3, page: 1}
+1: {type: 2}
+2: {type: 3, page: 9}
+3: {type: 3, page: 10}
+4: {type: 3, page: 11}
+5: {type: 1, page: 12}
+6: {type: 3, page: 13}
+7: {type: 3, page: 14}
+8: {type: 3, page: 15}
+9: {type: 2}
+10: {type: 3, page: 17}
+>> navigation_model_create(13, 17, 3);
+0: {type: 3, page: 1}
+1: {type: 2}
+2: {type: 3, page: 10}
+3: {type: 3, page: 11}
+4: {type: 3, page: 12}
+5: {type: 1, page: 13}
+6: {type: 3, page: 14}
+7: {type: 3, page: 15}
+8: {type: 3, page: 16}
+9: {type: 3, page: 17}

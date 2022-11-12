@@ -1,0 +1,6 @@
+/Js/*.js
+/src/*/*.js
+/src/*/router/*.js
+/node_modules/
+/*.d.ts
+/*.js
