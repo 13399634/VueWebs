@@ -1,19 +1,17 @@
 <template>
-  <div id="work">
+  <div id="work" v-if="page !== 0">
     <chapter-work-info
       key="chapter-work-info-cache"
       v-bind:title="title"
       v-bind:page="page"
     ></chapter-work-info>
-    <template v-if="page !== 0">
-      <chapter-work-item
-        v-for="index in page"
-        v-bind:key="`${localId}-${index}`"
-        v-bind:index="index"
-        v-bind:page="page"
-        v-bind:url="urls[index - 1]"
-      ></chapter-work-item>
-    </template>
+    <chapter-work-item
+      v-for="index in page"
+      v-bind:key="`${localId}-${index}`"
+      v-bind:index="index"
+      v-bind:page="page"
+      v-bind:url="urls[index - 1]"
+    ></chapter-work-item>
   </div>
 </template>
 
