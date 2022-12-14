@@ -24,7 +24,7 @@ export class UrlParam {
       // 解码url search
       search = decodeURI(search.slice(1));
       // 分割search参数
-      const params: string[] = search.split("&");
+      const params: Array<string> = search.split("&");
       // 预处理 简化拼接
       key = `${key}=`;
       // 预处理 获取键key的长度
@@ -115,7 +115,7 @@ export class UrlParam {
   public static sets(map: { [key: string]: string }): void {
     // 获取键
     // { unknown, string }
-    const keys: string[] = Object.keys(map);
+    const keys: Array<string> = Object.keys(map);
     // 键的数量
     const l: number = keys.length;
     // 键
@@ -161,7 +161,7 @@ export class UrlParam {
    */
   public static setHistorys(map: { [key: string]: string }): void {
     // 获取键
-    const keys: string[] = Object.keys(map);
+    const keys: Array<string> = Object.keys(map);
     // 循环更新
     for (let i = 0, key: string; i < keys.length; i++) {
       // 键

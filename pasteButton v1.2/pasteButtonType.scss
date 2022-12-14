@@ -1,0 +1,79 @@
+@charset "utf-8";
+html {
+  background: seashell;
+}
+
+body {
+  margin: 0 auto;
+  width: 45em;
+  background: papayawhip;
+  padding: 0 4em 4em 4em;
+  counter-reset: section;
+}
+
+a {
+  color: hotpink;
+
+  &.code:before {
+    content: "转到➤ ";
+  }
+}
+
+.top {
+  margin: 0;
+  padding: 1em 0;
+}
+
+.h3 {
+  display: list-item;
+  margin: 0.3em 0 0.5em 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-bottom: 2px solid;
+  counter-increment: section;
+  counter-reset: section-d;
+
+  &::marker {
+    content: counters(section, ".") ". ";
+  }
+}
+
+.h4 {
+  display: list-item;
+  margin: 0.1em 0 0.3em 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-bottom: 1px solid;
+  counter-increment: section-d;
+
+  &::marker {
+    content: counters(section, ".") "." counters(section-d, ".") ". ";
+  }
+}
+
+.line {
+  font-size: 1.1em;
+  margin: 0.2em 0 0.2em 1.0em;
+}
+
+.code {
+  font-weight: bold;
+  color: steelblue;
+  border-bottom: 1px solid;
+  word-break: break-all;
+}
+
+.copy-button {
+  background: aqua;
+  font-size: 0.8em;
+  padding: 0.15em 0.2em 0.05em 0.2em;
+  border-radius: 0.4em;
+  color: darkviolet;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+

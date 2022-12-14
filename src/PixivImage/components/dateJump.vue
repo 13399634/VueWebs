@@ -1,10 +1,10 @@
 <template>
   <div style="display: block" class="Day-Jump" hidden>
     <button class="db1" type="button" v-on:click="preview">
-      <img src="http://localhost:899/style/left.svg" alt="left" />
+      <img v-bind:src="leftImg" alt="left" />
     </button>
     <button class="db2" type="button" v-on:click="next">
-      <img src="http://localhost:899/style/right.svg" alt="right" />
+      <img v-bind:src="rightImg" alt="right" />
     </button>
   </div>
 </template>
@@ -17,11 +17,22 @@ import {
 } from "vue";
 import { UrlParam } from "@/../Js/tools-getParam";
 import { DateTime } from "@/../Js/tools-getDate";
+import { ReLocal899Origin } from "@/../Js/PixivImage/urlRe";
 
 let instance: ComponentInternalInstance | null;
 
 export default defineComponent({
   name: "dateJump",
+  computed: {
+    // 图片链接 left
+    leftImg: function (): string {
+      return `${ReLocal899Origin}style/left.svg`;
+    },
+    // 图片链接 right
+    rightImg: function (): string {
+      return `${ReLocal899Origin}style/right.svg`;
+    },
+  },
   methods: {
     /**
      * @function

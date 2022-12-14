@@ -30,7 +30,7 @@ export default defineComponent({
   components: { EditMsgLine },
   data: function (): {
     // msg展示行数据序列
-    msg_info: MsgLineType[];
+    msg_info: Array<MsgLineType>;
     // msg展示行数据可被使用的id
     msg_id: number;
   } {

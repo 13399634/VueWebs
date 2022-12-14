@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { RePximgOriginP } from "@/../Js/PixivImage/urlRe";
-import { setLocalId } from "../../../Js/PixivImage/LocalDataRead";
+import { setLocalId } from "@/../Js/PixivImage/LocalDataRead";
 
 // 作品数据
 interface WorkType {

@@ -6,6 +6,6 @@ enum classMap {
 }
 
 // 编辑行类型
-const class_arr: string[] = [classMap.code, classMap.notes];
+const class_arr: Array<string> = [classMap.code, classMap.notes];
 
 export { class_arr, classMap };

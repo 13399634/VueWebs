@@ -1,5 +1,5 @@
 <template>
-  <div id="view" v-if="show">
+  <div id="view">
     <view-tool></view-tool>
     <view-page
       v-for="page in pages"
@@ -17,8 +17,7 @@ import {
   getCurrentInstance,
 } from "vue";
 
-const superagent = require("superagent");
-import { IPageType, PageType } from "@/../Js/superLxLines2/page-type";
+import { PageType } from "@/../Js/superLxLines2/page-type";
 import {
   getPagesSession,
   pushEditSession,
@@ -41,28 +40,17 @@ export default defineComponent({
   },
   data: function (): {
     // 所有页面数据
-    pages: PageType[] | null;
-    // 页面是否加载
-    show: boolean;
+    pages: Array<PageType> | null;
   } {
+    // 获取session所有页面数据
+    let sessionPages: string = getPagesSession();
+    // 加载所有页面数据
+    let pages = JSON.parse(sessionPages);
     return {
-      pages: null,
-      show: false,
+      pages: pages,
     };
   },
   methods: {
-    /**
-     * @function
-     * @async
-     * @description 获取所有页面数据
-     */
-    getPages: async function (): Promise<void> {
-      // 获取session所有页面数据
-      let sessionPages: string = getPagesSession();
-      // 加载所有页面数据
-      this.pages = JSON.parse(sessionPages);
-      this.show = true;
-    },
     /**
      * @function
      * @description 新建页面
@@ -89,47 +77,24 @@ export default defineComponent({
      */
     edit_open: function (page: PageType) {
       pushEditSession(JSON.stringify(page));
+      this.edit_jump();
+    },
+    /**
+     * @function
+     * @description 跳转到编辑页面
+     */
+    edit_jump: function () {
       router.push({ path: "edit", query: this.$route.query });
     },
-    // add_page: function (page: PageType) {
-    //   if (this.pages!.length === page.id) {
-    //     this.pages!.push(page);
-    //   } else {
-    //     this.pages!.splice(page.id, 1, page);
-    //   }
-    // },
-    // post_server_data_by_edit_root_end: function (page: unknown) {
-    //   // page
-    //   this.add_page(page as PageType);
-    //   // eslint-disable-next-line no-undef
-    //   superagent
-    //     .post("/data/ajax/write.json")
-    //     .set("Content-Type", "application/json;charset=utf-8")
-    //     .type("form")
-    //     .send({
-    //       json: JSON.stringify([JSON.stringify(this.pages)]),
-    //       name: this.name,
-    //       type: 5,
-    //     })
-    //     .end();
-    // },
-    // give_up_page_by_edit_root_tool_end_2_2: function () {
-    //   this.show = true;
-    // },
-    // view_content_by_edit_root_end: function (page: unknown) {
-    //   // page
-    //   this.add_page(page as PageType);
-    //   this.show = true;
-    //   console.log(this.show);
-    // },
-    // post_server_data_then_view_by_edit_root_end: function (page: unknown) {
-    //   this.post_server_data_by_edit_root_end(page as PageType);
-    //   this.show = true;
-    // },
+    /**
+     * @see re_edit_by_view_tool
+     * @see re_edit_by_view_tool_end
+     */
+    re_edit_by_view_tool_end: function () {
+      this.edit_jump();
+    },
   },
   mounted: async function (): Promise<void> {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let _this = this;
     instance = getCurrentInstance();
     /**
      * @see new_open_by_view_tool
@@ -137,7 +102,7 @@ export default defineComponent({
      */
     instance!.proxy!.$NativeEventBus.on(
       "new_open_by_view_tool",
-      _this.new_open_by_view_tool_end
+      this.new_open_by_view_tool_end
     );
     /**
      * @see edit_open_by_view_page
@@ -145,25 +110,30 @@ export default defineComponent({
      */
     instance!.proxy!.$NativeEventBus.on(
       "edit_open_by_view_page",
-      _this.edit_open_by_view_page_end
+      this.edit_open_by_view_page_end
     );
-    await _this.getPages();
-    // instance!.proxy!.$NativeEventBus.on(
-    //   "post_server_data_by_edit_root",
-    //   this.post_server_data_by_edit_root_end
-    // );
-    // instance!.proxy!.$NativeEventBus.on(
-    //   "give_up_page_by_edit_root_tool",
-    //   this.give_up_page_by_edit_root_tool_end_2_2
-    // );
-    // instance!.proxy!.$NativeEventBus.on(
-    //   "view_content_by_edit_root",
-    //   this.view_content_by_edit_root_end
-    // );
-    // instance!.proxy!.$NativeEventBus.on(
-    //   "post_server_data_then_view_by_edit_root",
-    //   this.post_server_data_then_view_by_edit_root_end
-    // );
+    /**
+     * @see re_edit_by_view_tool
+     * @see re_edit_by_view_tool_end
+     */
+    instance!.proxy!.$NativeEventBus.on(
+      "re_edit_by_view_tool",
+      this.re_edit_by_view_tool_end
+    );
+  },
+  beforeUnmount(): void {
+    instance!.proxy!.$NativeEventBus.off(
+      "new_open_by_view_tool",
+      this.new_open_by_view_tool_end
+    );
+    instance!.proxy!.$NativeEventBus.off(
+      "edit_open_by_view_page",
+      this.edit_open_by_view_page_end
+    );
+    instance!.proxy!.$NativeEventBus.off(
+      "re_edit_by_view_tool",
+      this.re_edit_by_view_tool_end
+    );
   },
 });
 </script>

@@ -1,7 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import App from "@/superLxLines2/App.vue";
-import viewApp from "@/superLxLines2/components/viewApp.vue";
-import editApp from "@/superLxLines2/components/editApp.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,12 +10,18 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "view",
         name: "view",
-        component: viewApp,
+        component: () =>
+          import(
+            /* webpackChunkName: 'superLxLines2-viewApp' */ "@/superLxLines2/components/viewApp.vue"
+          ),
       },
       {
         path: "edit",
         name: "edit",
-        component: editApp,
+        component: () =>
+          import(
+            /* webpackChunkName: 'superLxLines2-editApp' */ "@/superLxLines2/components/editApp.vue"
+          ),
       },
     ],
   },

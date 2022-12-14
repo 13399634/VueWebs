@@ -6,6 +6,7 @@ interface dateMapType {
   m: number;
   s: number;
 }
+
 type dateMapKey = keyof dateMapType;
 
 /**
@@ -47,9 +48,9 @@ export class DateTime {
     // 获取当前时间戳
     const date: Date = new Date();
     // 格式化块
-    const keys: string[] = [];
+    const keys: Array<string> = [];
     // 格式化块替换参数
-    const values: string[] = [];
+    const values: Array<string> = [];
     // 获取格式化分块
     const fm: RegExpMatchArray | null = format.match(this.eq);
     // 为获取到格式化块 格式错误
@@ -69,10 +70,10 @@ export class DateTime {
     for (let i = 0; i < fm.length; i++) {
       // 格式化分块
       const value: string = fm[i];
-      // 获取格式化块替换参数
-      const fms: RegExpMatchArray = value.match(value) as RegExpMatchArray;
       // 格式化块已存在对应替换参数
       if (values.indexOf(value) === -1) {
+        // 获取格式化块替换参数
+        const fms: RegExpMatchArray = value.match(this.eqs) as RegExpMatchArray;
         // 未存在
         // YMDhms获取 年月日时分秒数值的键
         const value3: dateMapKey = <dateMapKey>(<unknown>fms[3]);
@@ -81,7 +82,7 @@ export class DateTime {
         // Q|q Q设定长度 q最小长度
         if (fms[1] === "Q") {
           // Q设定长度的数值
-          const value2: number = parseInt(fms[2]);
+          const value2 = Number(fms[2]);
           // 年月日时分秒的具体数值的长度
           const vbLength: number = vb.length;
           // Q设定长度的数值 大于 年月日时分秒的具体数值的长度
@@ -160,7 +161,7 @@ export class DateTime {
    * @static
    * @description 获取格式化块
    */
-  private static eq = RegExp("<Q\\d+|q|/[YMDhms]>", "g");
+  private static eq = RegExp("<(?:Q\\d+|q|)\\/[YMDhms]>", "g");
   /**
    * @member {RegExp}
    * @for DateTime

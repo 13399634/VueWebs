@@ -24,7 +24,7 @@ export interface PageType {
   // 页数
   page: number;
   // 段落数据
-  content: ContentType[];
+  content: Array<ContentType>;
 }
 
 export class IPageType implements PageType {

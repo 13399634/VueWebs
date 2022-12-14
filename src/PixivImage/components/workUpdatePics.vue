@@ -38,13 +38,13 @@ export default defineComponent({
   props: {
     // 作品的一些近期相关作品id
     other: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<Array<string>>,
       required: true,
     },
   },
   data(): {
     // 相关作品数据
-    ifs: IfsType[] | null;
+    ifs: Array<IfsType> | null;
   } {
     return {
       ifs: null,
@@ -84,7 +84,7 @@ export default defineComponent({
         };
       } = response.body["body"];
       // 相关作品数据
-      let ov: IfsType[] = [];
+      let ov: Array<IfsType> = [];
       // 浏览器中浏览id数据
       let ids = `,${getLocalId()},`;
       // 遍历 作品的一些近期相关作品id

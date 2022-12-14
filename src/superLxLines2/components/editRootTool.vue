@@ -21,22 +21,26 @@ import {
   ComponentInternalInstance,
   defineComponent,
   getCurrentInstance,
+  PropType,
 } from "vue";
-import { classMap } from "@/../Js/superLxLines2/edit-line-type";
+import { throttle_ms } from "@/../Js/timeIn";
+import { MsgLineColor } from "@/../Js/superLxLines2/msg-line-type";
+import { msgPush } from "@/../Js/superLxLines2/msg-push";
+import { toolMap } from "@/../Js/superLxLines2/edit-tool-type";
 
 let instance: ComponentInternalInstance | null;
 export default defineComponent({
   name: "editRootTool",
   props: {
     tool: {
-      type: String,
+      type: String as PropType<toolMap>,
       required: true,
     },
   },
   computed: {
     // 启用工具名称
     tool_text: function (): string {
-      return classMap[this.tool];
+      return toolMap[this.tool];
     },
   },
   methods: {
@@ -51,7 +55,7 @@ export default defineComponent({
     },
     /**
      * @function
-     * @description 更改显示工具
+     * @description 过滤掉空格计数与内容为空的段落
      * @see clean_space_line_all_by_edit_root_tool
      * @see clean_space_line_all_by_edit_root_tool_end
      */
@@ -75,7 +79,14 @@ export default defineComponent({
      * @see post_server_data_by_edit_root_tool
      * @see post_server_data_by_edit_root_tool_end
      */
-    post_server_data_by_edit_root_tool: function () {
+    post_server_data_by_edit_root_tool: function (ev: Event) {
+      // 请求最小时
+      if (throttle_ms(this.post_server_data_by_edit_root_tool, 3000)) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        msgPush(instance, MsgLineColor.red, `请求繁忙, 请3s后再次请求`);
+        return;
+      }
       instance!.proxy!.$NativeEventBus.emit(
         "post_server_data_by_edit_root_tool"
       );
@@ -104,7 +115,14 @@ export default defineComponent({
      * @see post_server_data_then_view_by_edit_root_tool
      * @see post_server_data_then_view_by_edit_root_tool_end
      */
-    post_server_data_then_view_by_edit_root_tool: function () {
+    post_server_data_then_view_by_edit_root_tool: function (ev: Event) {
+      // 请求最小时
+      if (throttle_ms(this.post_server_data_by_edit_root_tool, 3000)) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        msgPush(instance, MsgLineColor.red, `请求繁忙, 请3s后再次请求`);
+        return;
+      }
       instance!.proxy!.$NativeEventBus.emit(
         "post_server_data_then_view_by_edit_root_tool"
       );

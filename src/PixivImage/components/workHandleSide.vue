@@ -55,7 +55,7 @@ export default defineComponent({
     },
     // 作品的一些近期相关作品id
     other: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<Array<string>>,
       required: true,
     },
     // 用户信息数据
