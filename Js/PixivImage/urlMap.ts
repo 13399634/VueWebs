@@ -11,10 +11,10 @@ const urlMap: { "`": string; "^": string; "%": string } = {
 
 /**
  * @const
- * @type { string[] }
+ * @type { Array<string> }
  * @description url异常字符串
  */
-const keys: string[] = Object.keys(urlMap);
+const keys: Array<string> = Object.keys(urlMap);
 
 /**
  * @function
@@ -24,7 +24,7 @@ const keys: string[] = Object.keys(urlMap);
  */
 function urlMapReplace(name: string): string {
   // 是否包含异常字符串
-  const eb: boolean[] = [];
+  const eb: Array<boolean> = [];
   for (let i = 0; i < keys.length; i++) {
     eb.push(name.indexOf(keys[i]) !== -1);
   }
@@ -34,7 +34,7 @@ function urlMapReplace(name: string): string {
     return name;
   }
   // url字符串数组
-  const ls: string[] = [];
+  const ls: Array<string> = [];
   // 遍历url字符串
   for (let i = 0, e: boolean, p: string; i < name.length; i++) {
     // 是否不是一场字符串

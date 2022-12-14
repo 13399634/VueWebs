@@ -6,11 +6,11 @@ const superagent = require("superagent");
  * @async
  * @private
  * @param name {string} UidAll | IdAll json名字
- * @return {Promise<{ uid: string[], id: string[] }>} 服务器中的资源
+ * @return {Promise<{ uid: Array<string>, id: Array<string> }>} 服务器中的资源
  */
 async function getDataAll(
   name: string
-): Promise<{ uid: string[]; id: string[] }> {
+): Promise<{ uid: Array<string>; id: Array<string> }> {
   try {
     // 资源请求
     const response = await superagent
@@ -26,18 +26,18 @@ async function getDataAll(
 /**
  * @function getUidAll
  * @async
- * @return {Promise<string[]>} 服务器中所有的UID
+ * @return {Promise<Array<string>>} 服务器中所有的UID
  */
-async function getUidAll(): Promise<string[]> {
+async function getUidAll(): Promise<Array<string>> {
   return (await getDataAll("UidAll")).uid;
 }
 
 /**
  * @function getIdAll
  * @async
- * @return {Promise<string[]>} 服务器中所有的ID
+ * @return {Promise<Array<string>>} 服务器中所有的ID
  */
-async function getIdAll(): Promise<string[]> {
+async function getIdAll(): Promise<Array<string>> {
   return (await getDataAll("IdAll")).id;
 }
 

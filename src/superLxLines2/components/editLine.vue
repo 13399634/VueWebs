@@ -8,10 +8,10 @@
     <button type="button" class="type" v-on:click="change_type_by_edit_line">
       {{ line.type }}
     </button>
-    <label class="space" v-if="tool === 'space'">
+    <label class="space" v-if="0 === toolType">
       <input v-model.number.lazy="space" type="number" />
     </label>
-    <label class="cancel" v-else-if="tool === 'cancel'">
+    <label class="cancel" v-else-if="1 === toolType">
       <img
         alt="cancel"
         v-bind:src="`${stylePath}superLxLines/delete.svg`"
@@ -53,9 +53,11 @@ import { throttle_ms } from "@/../Js/timeIn";
 import { class_arr, classMap } from "@/../Js/superLxLines2/edit-line-type";
 import {
   change_lines_by_edit_line_type,
+  content_change_line_by_edit_line_type,
   enter_load_line_by_edit_line_type,
   merge_two_lines_by_edit_line_type,
   paste_lines_by_edit_line_type,
+  space_change_line_by_edit_line_type,
 } from "@/../Js/superLxLines2/mitt-type";
 import {
   MsgLineColor,
@@ -63,6 +65,7 @@ import {
 } from "@/../Js/superLxLines2/msg-line-type";
 import { ContentType } from "@/../Js/superLxLines2/page-type";
 import { ReLocal899Origin } from "@/../Js/superLxLines2/urlRe";
+import { toolMap } from "@/../Js/superLxLines2/edit-tool-type";
 
 let instance: ComponentInternalInstance | null;
 export default defineComponent({
@@ -82,21 +85,38 @@ export default defineComponent({
       required: true,
     },
     tool: {
-      type: String,
+      type: String as PropType<toolMap>,
       required: true,
     },
   },
   computed: {
+    // 工具类型
+    toolType: function (): number {
+      if (toolMap.space === this.tool) {
+        return 0;
+      } else if (toolMap.delete === this.tool) {
+        return 1;
+      } else {
+        return -1;
+      }
+    },
     // 当前编辑行内容前的空格
     space: {
       set: function (value: number) {
         if (value !== this.line.space) {
-          // idx value
-          // this.NativeEventBus.$emit(
-          //   "space_change_line_by_edit_line",
-          //   this.idx,
-          //   value
-          // );
+          let mitt: space_change_line_by_edit_line_type = {
+            // index
+            index: this.idx,
+            // coreInput内容
+            space: value,
+          };
+          /**
+           * @see space_change_line_by_edit_line_end
+           */
+          instance!.proxy!.$NativeEventBus.emit(
+            "space_change_line_by_edit_line",
+            mitt
+          );
         }
       },
       get: function (): number {
@@ -107,12 +127,19 @@ export default defineComponent({
     content: {
       set: function (value: string): void {
         if (value !== this.line.content) {
-          // idx value
-          // this.NativeEventBus.$emit(
-          //   "content_change_line_by_edit_line",
-          //   this.idx,
-          //   value
-          // );
+          let mitt: content_change_line_by_edit_line_type = {
+            // index
+            index: this.idx,
+            // coreInput内容
+            content: value,
+          };
+          /**
+           * @see content_change_line_by_edit_line_end
+           */
+          instance!.proxy!.$NativeEventBus.emit(
+            "content_change_line_by_edit_line",
+            mitt
+          );
         }
       },
       get: function (): string {

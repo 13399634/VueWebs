@@ -5,14 +5,30 @@ const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
     //配置多页面入口
     pages: {
-        // PixivImage: {
-        //     entry: 'src/PixivImage/main.js',
-        //     template: 'PixivImage.html',
-        // },
+        PixivEbook: {
+            entry: 'src/PixivEbook/main.js',
+            template: 'PixivEbook.html',
+        },
+        PixivImage: {
+            entry: 'src/PixivImage/main.js',
+            template: 'PixivImage.html',
+        },
+        PixivImageLocal: {
+            entry: 'src/PixivImageLocal/main.js',
+            template: 'PixivImageLocal.html',
+        },
         superLxLines2: {
             entry: 'src/superLxLines2/main.js',
             template: 'superLxLines2.html',
         },
+        WebEbook: {
+            entry: 'src/WebEbook/main.js',
+            template: 'WebEbook.html',
+        },
+        // DailyInfo: {
+        //     entry: 'src/DailyInfo/main.js',
+        //     template: 'DailyInfo.html',
+        // },
     },
     // 输出路径
     outputDir: path.resolve(__dirname, '../src/webapp/vue/'),
@@ -73,18 +89,6 @@ module.exports = {
             //     // }
             //     /*也就是在前端使用/api可以直接替换为(http://localhost:899)*/
             // },
-            '/style/superLxLines': {
-                target: 'http://localhost:899',
-                changeOrigin: true,
-            },
-            '/data/json': {
-                target: 'http://localhost:899',
-                changeOrigin: true,
-            },
-            '/data/ajax': {
-                target: 'http://localhost:899',
-                changeOrigin: true,
-            },
             '/RePixivOrigin': {
                 target: 'https://www.pixiv.net',
                 changeOrigin: true,

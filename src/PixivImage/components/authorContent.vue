@@ -65,15 +65,15 @@ export default defineComponent({
     // 导航页面允许加载
     show: boolean;
     // ids序列
-    ids: string[] | null;
+    ids: Array<string> | null;
     // 数据查询所需ids的切片序号
-    idsPage: [number, number][][] | null;
+    idsPage: Array<[number, number]>[] | null;
     // 页面总数
     pageTotal: number | null;
     // 当前页数
     page: number;
     // 作品数据
-    data: WorkType[] | null;
+    data: Array<WorkType> | null;
   } {
     let page: number | string | null = UrlParam.get("page");
     if (page === null) {
@@ -114,7 +114,7 @@ export default defineComponent({
         throw new SyntaxError();
       }
       // ids序列
-      let ids: string[] = Object.keys(response.body["body"]["illusts"]);
+      let ids: Array<string> = Object.keys(response.body["body"]["illusts"]);
       // ids序列非空
       if (ids.length === 0) {
         return;
@@ -124,12 +124,12 @@ export default defineComponent({
       // 提交
       this.ids = ids;
       // 数据查询所需ids的切片序号
-      let idsPage: [number, number][][] = [];
+      let idsPage: Array<[number, number]>[] = [];
       // ids序列 长度
       let idsLen: number = ids.length;
-      for (let i = 0; i < idsLen;) {
+      for (let i = 0; i < idsLen; ) {
         // 一轮查询 需求一系列的ids首尾序列
-        let _ids: [number, number][] = [];
+        let _ids: Array<[number, number]> = [];
         for (
           let j = 0;
           j < this.pageNum && i < idsLen;
@@ -180,9 +180,9 @@ export default defineComponent({
      */
     async getIdInfo(): Promise<void> {
       // 一轮查询 需求一系列的ids首尾序列
-      let idsPage: [number, number][] = this.idsPage![this.page - 1]!;
+      let idsPage: Array<[number, number]> = this.idsPage![this.page - 1]!;
       // 本地 作品数据
-      let info: WorkType[] = [];
+      let info: Array<WorkType> = [];
       // 本地浏览id数据
       let ids = `,${getLocalId()},`;
       // 遍历 一轮查询 需求一系列的ids首尾序列
@@ -223,7 +223,7 @@ export default defineComponent({
           };
         } = response.body["body"]["works"];
         // 相应数据 keys
-        let dataKeys: string[] = Object.keys(data);
+        let dataKeys: Array<string> = Object.keys(data);
         // 相应数据 keys 序列反转
         dataKeys.reverse();
         // 遍历 相应数据

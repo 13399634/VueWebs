@@ -9,7 +9,7 @@ enum NavigationType {
  * @param page {Number} 当前页面
  * @param total {Number} 页面总数
  * @param base {Number} 默认值 3 最大page数量
- * @return {{ type: NavigationType; page?: Number }[]} 页面导航模型
+ * @return {Array<{ type: NavigationType; page?: Number }>} 页面导航模型
  * @description 生成页面导航模型
  * @example <1> <(···)> <page max: base> <current> <page max: base> <(···)> <total>
  * @see ./navigation.test
@@ -18,8 +18,8 @@ function navigation_model_create(
   page: number,
   total: number,
   base = 3
-): { type: NavigationType; page?: number }[] {
-  const model: { type: NavigationType; page?: number }[] = [];
+): Array<{ type: NavigationType; page?: number }> {
+  const model: Array<{ type: NavigationType; page?: number }> = [];
   // >· page 向上导航模型
   // page不为1时自动创建 1 page
   // page为1时不创建 1 page

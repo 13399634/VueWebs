@@ -18,7 +18,7 @@ String.prototype.stringReplaceC1 = function (
   // 当前字符串长度
   const tl: number = this.length;
   // 缓存替换后的字符串的数组
-  const tmp: string[] = new Array(tl);
+  const tmp: Array<string> = new Array(tl);
 
   // 遍历当前字符串
   for (let i = 0; i < tl; i++) {
@@ -49,7 +49,7 @@ String.prototype.stringReplaceC2 = function (c2: string, d: string) {
   // 当前字符串长度
   const tl: number = text.length;
   // 缓存替换后的字符串的数组
-  const tmp: string[] = [];
+  const tmp: Array<string> = [];
 
   // 匹配字符串 查询index
   let ci = 0;
@@ -58,7 +58,7 @@ String.prototype.stringReplaceC2 = function (c2: string, d: string) {
   // 匹配字符串查询结束
   const ce: number = cl - 1;
   // 二级缓存
-  let ctp: string[] = new Array(ce);
+  let ctp: Array<string> = new Array(ce);
 
   for (let i = 0; i < tl; i++) {
     // 字符

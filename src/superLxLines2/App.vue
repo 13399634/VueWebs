@@ -38,7 +38,7 @@ export default defineComponent({
      * @description 初始路由数据
      */
     initRoute: async function (): Promise<void> {
-      let query: Record<string, string | (string | null)[] | null> =
+      let query: Record<string, string | Array<string | null> | null> =
         this.$route.query;
       // 获取 页面 id
       let qName: string | undefined = query.name as string | undefined;
@@ -62,13 +62,13 @@ export default defineComponent({
       // 不再初始化
       this.initRoute = async () => this.voidFun();
     },
-    getPages: async function (): Promise<PageType[]> {
-      let pages: PageType[];
+    getPages: async function (): Promise<Array<PageType>> {
+      let pages: Array<PageType>;
       try {
         let response = await superagent
           .get(`${ReLocal899Origin}data/json/${this.name}.json`)
           .set("accept", "text/json");
-        pages = response.body as PageType[];
+        pages = response.body as Array<PageType>;
       } catch (e) {
         // 页面数据不存在
         // 创建默认值
@@ -94,7 +94,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 body {
   margin: 0;
 }

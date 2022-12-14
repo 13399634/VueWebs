@@ -92,7 +92,7 @@ interface ItemType extends ItemTypeP1 {
 // 时间加载数据
 interface TimeRePositionType {
   // 当前轮次加载的页面
-  pages: number[];
+  pages: Array<number>;
   // 运行完成当前轮次请求后等待时间
   time: number;
 }
@@ -106,9 +106,9 @@ export default defineComponent({
     // 日期
     date: null | string;
     // 所有的图片块加载字典数据
-    Item: null | ItemType[];
+    Item: null | Array<ItemType>;
     // 时间加载数据
-    object_core: TimeRePositionType[];
+    object_core: Array<TimeRePositionType>;
   } {
     return {
       date: null,
@@ -121,10 +121,10 @@ export default defineComponent({
      * @function
      * @async
      * @param page {number} 页面
-     * @return {Promise<ItemTypeP1[]>} 一页ranking.php 图片块加载字典数据
+     * @return {Promise<Array<ItemTypeP1>>} 一页ranking.php 图片块加载字典数据
      * @description 获取一页ranking.php 图片块加载字典数据<过程1>
      */
-    getItem: async function (page: number): Promise<ItemTypeP1[]> {
+    getItem: async function (page: number): Promise<Array<ItemTypeP1>> {
       let response;
       try {
         // ranking.php
@@ -141,7 +141,7 @@ export default defineComponent({
       } catch (e) {
         throw new SyntaxError();
       }
-      let body: ranking_ud[] = response.body.contents;
+      let body: Array<ranking_ud> = response.body.contents;
       // dev 环境
       if (dev) {
         // url重定向 解决图片referer问题
@@ -151,7 +151,7 @@ export default defineComponent({
         });
       }
       // 储存一页ranking.php 图片块加载字典数据
-      let map: ItemTypeP1[] = [];
+      let map: Array<ItemTypeP1> = [];
       for (let i = 0; i < body.length; i++) {
         // ranking.php 获取数据字典类型
         let it: ranking_ud = body[i];
@@ -184,16 +184,16 @@ export default defineComponent({
       this.Item = [];
       // console.log(JSON.stringify(this.object_core));
       for (
-        let i = 0, idAll: string[], uidAll: string[];
+        let i = 0, idAll: Array<string>, uidAll: Array<string>;
         i < this.object_core.length;
         i++
       ) {
         // 当前轮次 时间加载数据
         const objectCoreS: TimeRePositionType = this.object_core[i];
         // 当前轮次 多页ranking.php 单个图片块加载字典数据<过程1>
-        const maps: ItemTypeP1[][] = [];
+        const maps: Array<Array<ItemTypeP1>> = [];
         // 当前轮次 多页ranking.php 单个图片块加载字典数据
-        const cmap: ItemType[] = [];
+        const cmap: Array<ItemType> = [];
         // 获取 当前轮次 多页ranking.php 单个图片块加载字典数据<过程1>
         for (let j = 0; j < objectCoreS.pages.length; j++) {
           maps.push(await this.getItem(objectCoreS.pages[j]));
@@ -208,7 +208,7 @@ export default defineComponent({
         // 单个图片块加载字典数据<过程1> => 单个图片块加载字典数据
         for (let j = 0; j < maps.length; j++) {
           // 单页 图片块加载字典数据<过程1>
-          const map: ItemTypeP1[] = maps[j];
+          const map: Array<ItemTypeP1> = maps[j];
           for (let k = 0; k < map.length; k++) {
             // 单个图片块加载字典数据<过程1>
             const it: ItemType = map[k] as ItemType;
@@ -256,10 +256,10 @@ export default defineComponent({
     },
     /**
      * @function
-     * @return {TimeRePositionType[]} 时间加载数据
+     * @return {Array<TimeRePositionType>} 时间加载数据
      * @description 获取时间加载数据
      */
-    object_core_get(): TimeRePositionType[] {
+    object_core_get(): Array<TimeRePositionType> {
       // 页面总数
       // 生产环境下只加载一页
       const PageNum = dev ? 1 : 10;
@@ -274,7 +274,7 @@ export default defineComponent({
       // (n+1)/(2*n)
       const ResistanceGear = 1;
       // 时间加载数据
-      const objectCore: TimeRePositionType[] = [];
+      const objectCore: Array<TimeRePositionType> = [];
       // 一轮次 时间加载数据
       let objectCoreS: TimeRePositionType = {
         pages: [],

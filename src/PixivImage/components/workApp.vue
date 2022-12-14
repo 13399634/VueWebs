@@ -39,7 +39,7 @@ interface WorkType {
   // 作品图片链接 origin
   org: null | string;
   // 作品的一些近期相关作品id
-  other: null | string[];
+  other: null | Array<string>;
 }
 
 // 用户信息数据
@@ -156,7 +156,7 @@ export default defineComponent({
         org.indexOf('"')
       )}`;
       // 作品的一些近期相关作品id
-      let other: string[] = [];
+      let other: Array<string> = [];
       // 获取 作者所有作品id 步骤1 全匹配
       let m: RegExpMatchArray | null = body.match(getOthers);
       // 未获取到作品id
