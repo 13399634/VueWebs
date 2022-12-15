@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [
+      "webpack-env"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@Js/*": [
+        "Js/*"
+      ],
+      "@pasteButton v1.2/*": [
+        "pasteButton v1.2/*"
+      ],
+      "tslib": [
+        "node_modules/tslib/tslib.d.ts"
+      ]
+    },
+    "lib": [
+      "es2015",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/**/**/*.ts",
+    "src/**/**/*.vue",
+
+    "Js/*.ts",
+    "Js/*/*.ts",
+    "Ts/*.ts",
+    "Ts/*/*.ts",
+    "pasteButton v1.2/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
